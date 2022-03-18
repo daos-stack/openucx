@@ -211,11 +211,13 @@ mv %buildroot/%_bindir/io_demo  %buildroot/%_libexecdir/%{name}/
 %files -n libucs0
 %defattr(-,root,root)
 %_libdir/libucs.so.*
+%_libdir/ucx/libucs_fuse.so.*
 
 %files -n libucs-devel
 %defattr(-,root,root)
 %_includedir/ucs/
 %_libdir/libucs.so
+%_libdir/ucx/libucs_fuse.so
 
 %files -n libuct0
 %defattr(-,root,root)
@@ -231,3 +233,6 @@ mv %buildroot/%_bindir/io_demo  %buildroot/%_libexecdir/%{name}/
 %_libdir/ucx/libuct_*.so
 
 %changelog
+* Fri Mar 18 2022 Brian J. Murrell <brian.murrell@intel> - 1.11.1-1
+- Add %%_libdir/ucx/libucs_fuse.so.* to the libucs0 package
+- Add %%_libdir/ucx/libucs_fuse.so to the libucs0-devel package
