@@ -41,4 +41,4 @@
 //@Library(value="pipeline-lib@your_branch") _
 
 
-packageBuildingPipelineDAOS(['distros': ['leap15']])
+packageBuildingPipeline(['distros': ['leap15']])

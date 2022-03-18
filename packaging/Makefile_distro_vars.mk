@@ -70,6 +70,9 @@ endif
 ifeq ($(ID),almalinux)
 ID = el
 endif
+ifeq ($(ID),rhel)
+ID = el
+endif
 ifeq ($(ID),el)
 DISTRO_ID := el$(VERSION_ID)
 DISTRO_BASE := $(basename EL_$(VERSION_ID))
