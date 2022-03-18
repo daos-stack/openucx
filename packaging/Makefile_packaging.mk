@@ -155,6 +155,11 @@ ifeq ($(DL_NAME),)
 DL_NAME = $(NAME)
 endif
 
+# this actually should replace all of the downloaders below
+$(notdir $(SOURCE)): $(SPEC) $(CALLING_MAKEFILE)
+	# TODO: need to clean up old ones
+	$(SPECTOOL) -g $(SPEC)
+
 $(DL_NAME)-$(DL_VERSION).tar.$(SRC_EXT).asc: $(SPEC) $(CALLING_MAKEFILE)
 	rm -f ./$(DL_NAME)-*.tar.{gz,bz*,xz}.asc
 	$(SPECTOOL) -g $(SPEC)
