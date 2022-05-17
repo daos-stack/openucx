@@ -9,7 +9,11 @@
 %bcond_without ib_cm
 %endif
 %bcond_with    knem
+%if 0%{?rhel} > 0 && 0%{?rhel} < 8
+%bcond_with rdmacm
+%else
 %bcond_without rdmacm
+%endif
 %bcond_with    rocm
 %bcond_with    ugni
 %bcond_with    xpmem
