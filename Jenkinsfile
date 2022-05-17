@@ -41,4 +41,4 @@
 //@Library(value="pipeline-lib@your_branch") _
 
 
-packageBuildingPipeline(['distros': ['el8', 'el7', 'leap15']])
+packageBuildingPipeline(['distros': ['el8', 'centos7', 'leap15']])
