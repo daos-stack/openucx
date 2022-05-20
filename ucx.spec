@@ -313,6 +313,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Fri May 20 2022 Kris Jacque <kristin.jacque@intel.com> - 1.12.1-1
+- Bump version to 1.12.1
+
 * Thu Nov 18 2021 Honggang Li <honli@redhat.com> - 1.11.2-2
 - TOOLS/INFO: Update help message for context features
 - Resolves: rhbz#1973959
