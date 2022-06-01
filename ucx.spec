@@ -21,7 +21,7 @@
 
 Name: ucx
 Version: 1.12.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
@@ -313,6 +313,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Wed Jun 01 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.12.1-2
+- Moved source to make file
+
 * Fri May 20 2022 Kris Jacque <kristin.jacque@intel.com> - 1.12.1-1
 - Bump version to 1.12.1
 

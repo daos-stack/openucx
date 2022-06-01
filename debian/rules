@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ 
+
+# No ibverbs support available on kFreeBSD, Hurd
+NO_VERBS_ARCH:= hurd-i386 kfreebsd-amd64 kfreebsd-i386 s390x
+NO_JAVA_ARCH:= hppa hurd-i386 ia64
+NO_NUMA_ARCH:= hurd-i386 kfreebsd-amd64 kfreebsd-i386
+
+VERBS:=   $(if $(filter $(DEB_TARGET_ARCH), $(NO_VERBS_ARCH)), , --with-verbs )
+NUMA:=   $(if $(filter $(DEB_TARGET_ARCH), $(NO_NUMA_ARCH)),  --disable-numa , )
+ifeq ($(filter stage1,$(DEB_BUILD_PROFILES)),)
+       JAVA := $(if $(filter $(DEB_TARGET_ARCH), $(NO_JAVA_ARCH)), \
+                 ,--with-jdk-dir=/usr/lib/jvm/default-java --with-java=/usr/lib/jvm/default-java )
+endif
+#$(JAVA) 
+
+override_dh_auto_configure:
+	dh_auto_configure --  \
+		--enable-mt \
+		$(VERBS) \
+		$(NUMA) \
+		--disable-backtrace-detail \
+		--disable-logging \
+		--enable-devel-headers \
+		--enable-examples \
+		--enable-cma
+
+override_dh_shlibdeps:
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+

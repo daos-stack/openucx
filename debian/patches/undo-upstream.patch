@@ -1,0 +1,22 @@
+Index: ucx-1.10.0~rc1/configure.ac
+===================================================================
+--- ucx-1.10.0~rc1.orig/configure.ac
++++ ucx-1.10.0~rc1/configure.ac
+@@ -346,17 +346,12 @@ AC_CONFIG_FILES([Makefile
+                  ])
+ AS_IF([test "x$with_docs_only" = xyes], [], [
+ AC_CONFIG_LINKS([
+-                 debian/compat:debian/compat
+                  debian/copyright:debian/copyright
+-                 debian/ucx.prerm:debian/ucx.prerm
+                  ])
+ AC_CONFIG_FILES([
+                  ucx.spec
+                  ucx.pc
+                  contrib/rpmdef.sh
+-                 debian/rules
+-                 debian/control
+-                 debian/changelog
+                  src/ucs/Makefile
+                  src/ucp/Makefile
+                  src/ucp/api/ucp_version.h
