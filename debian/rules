@@ -30,6 +30,7 @@ override_dh_auto_configure:
 		--enable-devel-headers \
 		--enable-examples \
 		--enable-cma
+	chmod +x debian/rules
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
