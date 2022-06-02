@@ -16,6 +16,7 @@ NUMA:=   $(if $(filter $(DEB_TARGET_ARCH), $(NO_NUMA_ARCH)),  --disable-numa , )
 
 override_dh_auto_configure:
 	dh_auto_configure --  \
+		--prefix=/usr \
 		--enable-mt \
 		$(VERBS) \
 		$(NUMA) \
@@ -25,6 +26,7 @@ override_dh_auto_configure:
 		--disable-assertions \
 		--enable-devel-headers \
 		--disable-examples \
+		--disable-tests \
 		--enable-cma	\
 		--without-go	\
 		--without-java
