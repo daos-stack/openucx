@@ -315,7 +315,7 @@ library internals, protocol objects, transports status, and more.
 
 %changelog
 * Wed Jun 01 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.12.1-2
-- Moved source to make file
+- Moved source to make file, add prefix
 
 * Fri May 20 2022 Kris Jacque <kristin.jacque@intel.com> - 1.12.1-1
 - Bump version to 1.12.1
