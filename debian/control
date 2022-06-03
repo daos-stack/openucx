@@ -3,7 +3,7 @@ Section: science
 Priority: optional
 Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
 Uploaders: Alastair McKinstry <mckinstry@debian.org>
-Build-Depends: debhelper-compat,
+Build-Depends: debhelper,
  libibverbs-dev (>= 1.1.7) [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386],
  libnuma-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64],
  librdmacm-dev, 
