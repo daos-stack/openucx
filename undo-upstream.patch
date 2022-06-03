@@ -1,8 +1,8 @@
-Index: ucx-1.10.0~rc1/configure.ac
-===================================================================
---- ucx-1.10.0~rc1.orig/configure.ac
-+++ ucx-1.10.0~rc1/configure.ac
-@@ -346,17 +346,12 @@ AC_CONFIG_FILES([Makefile
+diff --git a/configure.ac b/configure.ac
+index 9f97dd2a7..f32141dbe 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -363,17 +363,12 @@ AC_CONFIG_FILES([Makefile
                   ])
  AS_IF([test "x$with_docs_only" = xyes], [], [
  AC_CONFIG_LINKS([
@@ -17,6 +17,6 @@ Index: ucx-1.10.0~rc1/configure.ac
 -                 debian/rules
 -                 debian/control
 -                 debian/changelog
-                  src/ucs/Makefile
                   src/ucp/Makefile
                   src/ucp/api/ucp_version.h
+                  src/ucp/core/ucp_version.c
