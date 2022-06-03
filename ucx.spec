@@ -28,6 +28,8 @@ License: BSD
 URL: http://www.openucx.org
 Source: https://github.com/openucx/ucx/releases/download/v%version/ucx-%version.tar.gz
 
+Patch0: undo-upstream.patch
+
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 Prefix: %{_prefix}
 
