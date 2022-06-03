@@ -21,12 +21,13 @@
 
 Name: ucx
 Version: 1.12.1
-Release: 1%{?dist}
+Release: 3%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
 URL: http://www.openucx.org
 Source: https://github.com/openucx/ucx/releases/download/v%version/ucx-%version.tar.gz
+Patch1: undo-upstream.patch
 
 Patch0: undo-upstream.patch
 
@@ -96,7 +97,7 @@ Summary: Header files required for developing with UCX
 Provides header files and examples for developing with UCX.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %define _with_arg()   %{expand:%%{?with_%{1}:--with-%{2}}%%{!?with_%{1}:--without-%{2}}}
@@ -315,6 +316,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Fri Jun 03 2022 Brian J. Murrell <brian.murrell@intel.com> - 1.12.1-3
+- Move debian undo-upstream.patch into specfile
+
 * Wed Jun 01 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.12.1-2
 - Moved source to make file
 
