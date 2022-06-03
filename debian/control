@@ -42,7 +42,6 @@ Description: Header files for UCX library
 Package: libucx0
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: libopenmpi3 ( << 4.1.0-3)
 Architecture: amd64 arm64 ppc64el
 Multi-Arch: same
 Description: Unified Communication X libraries
