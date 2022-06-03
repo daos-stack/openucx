@@ -2,3 +2,4 @@
 /usr/lib/*/ucx/lib*.la
 # until java libs installed correctly
 usr/lib/*/jucx-*.jar
+/usr/lib/*/cmake
