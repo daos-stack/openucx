@@ -21,7 +21,7 @@
 
 Name: ucx
 Version: 1.12.1
-Release: 2%{?dist}
+Release: 1%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
@@ -105,7 +105,6 @@ Provides header files and examples for developing with UCX.
            --disable-assertions \
            --disable-params-check \
            --without-java \
-           --prefix=%{_prefix} \
 	   --without-go \
            %_enable_arg cma cma \
            %_with_arg cuda cuda \
@@ -122,8 +121,8 @@ Provides header files and examples for developing with UCX.
 make %{?_smp_mflags} V=1
 
 %install
-make DESTDIR=%{buildroot} install prefix=%{_prefix} libdir=%{_libdir} datadir=%{_datadir}
-rm -f %{buildroot}%{_libdir}/*la
+make DESTDIR=%{buildroot} install
+rm -f %{buildroot}%{_libdir}/*.la
 rm -f %{buildroot}%{_libdir}/*.a
 rm -f %{buildroot}%{_libdir}/ucx/*.la
 rm -f %{buildroot}%{_libdir}/ucx/lib*.so
@@ -314,9 +313,6 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
-* Wed Jun 01 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.12.1-2
-- Moved source to make file, add prefix
-
 * Fri May 20 2022 Kris Jacque <kristin.jacque@intel.com> - 1.12.1-1
 - Bump version to 1.12.1
 
