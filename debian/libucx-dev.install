@@ -1,0 +1,7 @@
+usr/lib/${DEB_HOST_MULTIARCH}/lib*.a
+usr/lib/${DEB_HOST_MULTIARCH}/ucx/lib*.a
+usr/lib/${DEB_HOST_MULTIARCH}/lib*.so
+usr/lib/${DEB_HOST_MULTIARCH}/ucx/*.so
+usr/include/*
+/usr/share/ucx/perftest/*	/usr/share/doc/libucx-dev/perftest
+usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/ucx.pc

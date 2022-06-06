@@ -1,0 +1,115 @@
+ucx (1.12.1-3) unstable; urgency=medium
+
+  * Move undo-upstream.patch into specfile for our build system
+
+ -- Brian J. Murrell <brian.murrell@intel.com>  Fri, 03 Jun 2022 11:41:10 -0500
+
+ucx (1.12.1-2) unstable; urgency=medium
+
+  * Upstream release 1.12.1
+
+ -- Jeff Olivier <jeffrey.v.olivier@intel.com>  Wed, 01 Jun 2022 16:19:25 +0100
+
+ucx (1.10.1~rc1+really.1.10.0-1) unstable; urgency=medium
+
+  * Push 1.10.0 over unstable for bullseye release
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 26 May 2021 20:19:25 +0100
+
+ucx (1.10.0~rc1-7) unstable; urgency=medium
+
+  * Drop duplicate configure that breaks cross-compiling.
+    Closes: #981257
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 01 Feb 2021 11:25:32 +0000
+
+ucx (1.10.0~rc1-6) unstable; urgency=medium
+
+  * Add Breaks: libopenmpi3 (<< 4.1.0-3) to get correct configuration
+    on systems without RDMA. Closes: #980448
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 20 Jan 2021 17:53:52 +0000
+
+ucx (1.10.0~rc1-5) unstable; urgency=medium
+
+  * typo:  -detail not details. Closes: #980238
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 19 Jan 2021 12:53:11 +0000
+
+ucx (1.10.0~rc1-4) unstable; urgency=medium
+
+  * Set --disable-backtrace-details to avoid non-public binutils ABI.
+    Closes: #980238
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 17 Jan 2021 20:36:28 +0000
+
+ucx (1.10.0~rc1-3) unstable; urgency=medium
+
+  * Silence unnecessary logging. 
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 12 Jan 2021 14:15:37 +0000
+
+ucx (1.10.0~rc1-2) unstable; urgency=medium
+
+  * Update maintainer list address (net->d.org). Closes: #979600
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 09 Jan 2021 17:05:15 +0000
+
+ucx (1.10.0~rc1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add debian/watch file
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 08 Jan 2021 19:24:08 +0000
+
+ucx (1.9.0-1) unstable; urgency=medium
+
+  * New upstream release
+    - Patch merged upstream : new_binutils.patch
+  * Change Team maintainer email to *alioth.debian.net
+  * Standards-Version: 4.5.1; no changes required
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 21 Dec 2020 13:34:55 +0000
+
+ucx (1.9.0~rc1-2) unstable; urgency=medium
+
+  * Add d/gbp.conf to match DEP-14 branch names
+  * Fix VCS-* urls in d/control and point to debian/latest branch.
+    Closes: #970714
+  * Rebuild to fix Bin Dep. Closes: #970715
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 22 Sep 2020 11:17:07 +0100
+
+ucx (1.9.0~rc1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 08 Aug 2020 10:13:36 +0100
+
+ucx (1.8.1-2) unstable; urgency=medium
+
+  * Rebuild against libbinutils 2.35-1. Closes: #966232
+  * Move to debhelper level 13
+  * Add files previously not installed, thanks to dh_missing
+  * Mark libucx-dev as M-A: same
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 25 Jul 2020 12:10:20 +0100
+
+ucx (1.8.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Only build for aamd64, arm64, powerpc64 - limited by atomics in code
+  * Build-depend on doxygen and librdmacm-dev
+  * Update numa - most archs now build numa
+  * Drop M-A: same from -dev pkg due to conflict
+  * Install examples and perftest scripts
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 14 Jul 2020 09:54:23 +0100
+
+ucx (1.8.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #962189)
+  * patch - undo_upstream : undo upstream code that changes debian/ dir
+  * patch - new_binutils : backport patch for latest binutils
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 09 Jun 2020 14:35:10 +0100

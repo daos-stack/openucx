@@ -1,0 +1,55 @@
+Source: ucx
+Section: science
+Priority: optional
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Uploaders: Alastair McKinstry <mckinstry@debian.org>
+Build-Depends: debhelper,
+ libibverbs-dev (>= 1.1.7) [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386],
+ libnuma-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64],
+ librdmacm-dev, 
+ default-jdk [!hppa !hurd-i386 !ia64] <!stage1>,
+ doxygen,
+ texlive-latex-base
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org:/science-team/ucx.git
+Vcs-Git: https://salsa.debian.org:/science-team/ucx.git -b debian/latest
+Homepage: https://www.openucx.org
+
+Package: ucx-utils
+Architecture: amd64 arm64 ppc64el
+Depends: libucx0 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Utilities for the UCX messaging library
+ Unified Communication X (UCX) provides an optimized communication layer
+ for Message Passing (MPI), PGAS/OpenSHMEM libraries and RPC/data-centric 
+ applications.
+ UCX utilizes high-speed networks for inter-node communication,i
+ and shared memory mechanisms for efficient intra-node communication.
+ This package provides utilities for the UCX frameworks.
+
+Package: libucx-dev
+Section: libdevel
+Architecture: amd64 arm64 ppc64el
+Multi-Arch: same
+Depends: libucx0 (= ${binary:Version}), ${misc:Depends}
+Description: Header files for UCX library
+ Unified Communication X (UCX) provides an optimized communication layer
+ for Message Passing (MPI), PGAS/OpenSHMEM libraries and RPC/data-centric 
+ applications.
+ UCX utilizes high-speed networks for inter-node communication,i
+ and shared memory mechanisms for efficient intra-node communication.
+ This package provides development files for UCX.
+
+Package: libucx0
+Section: libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+# DAOS does not build with this line in place and it does without it.
+# Breaks: libopenmpi3 ( << 4.1.0-3)
+Architecture: amd64 arm64 ppc64el
+Multi-Arch: same
+Description: Unified Communication X libraries
+ Unified Communication X (UCX) provides an optimized communication layer
+ for Message Passing (MPI), PGAS/OpenSHMEM libraries and RPC/data-centric 
+ applications.
+ UCX utilizes high-speed networks for inter-node communication,i
+ and shared memory mechanisms for efficient intra-node communication.
+ This package provides shared libraries for UCX.
