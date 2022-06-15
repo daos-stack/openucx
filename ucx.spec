@@ -102,7 +102,7 @@ Summary: Header files required for developing with UCX
 Provides header files and examples for developing with UCX.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n ucx-%{major}.%{minor}.%{bugrelease}
 
 %build
 %define _with_arg()   %{expand:%%{?with_%{1}:--with-%{2}}%%{!?with_%{1}:--without-%{2}}}
