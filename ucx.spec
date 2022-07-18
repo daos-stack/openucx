@@ -22,7 +22,7 @@
 %global major 1
 %global minor 13
 %global bugrelease 0
-%global prerelease rc2
+#%global prerelease rc2
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
@@ -321,8 +321,8 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
-* Wed Jun 29 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.13.0~rc2-1
-- Update to 1.13.0-rc2
+* Wed Jun 29 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.13.0-1
+- Update to 1.13.0
 
 * Fri Jun 03 2022 Brian J. Murrell <brian.murrell@intel.com> - 1.12.1-3
 - Move debian undo-upstream.patch into specfile
