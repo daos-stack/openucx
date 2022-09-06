@@ -21,8 +21,8 @@
 
 %global major 1
 %global minor 13
-%global bugrelease 1
-#%%global prerelease rc1
+%global bugrelease
+#%%global prerelease
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
