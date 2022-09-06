@@ -21,7 +21,7 @@
 
 %global major 1
 %global minor 13
-%global bugrelease
+%global bugrelease 0
 #%%global prerelease
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
@@ -113,19 +113,19 @@ Provides header files and examples for developing with UCX.
            --disable-assertions \
            --disable-params-check \
            --without-java \
-	   --without-go \
-           %_enable_arg cma cma \
-           %_with_arg cuda cuda \
-           %_with_arg gdrcopy gdrcopy \
-           %_with_arg ib verbs \
-           %_with_arg ib_cm cm \
-           %_with_arg knem knem \
-           %_with_arg rdmacm rdmacm \
-           %_with_arg rocm rocm \
-           %_with_arg xpmem xpmem \
+           --without-go \
+          %_enable_arg cma cma \
+          %_with_arg cuda cuda \
+          %_with_arg gdrcopy gdrcopy \
+          %_with_arg ib verbs \
+          %_with_arg ib_cm cm \
+          %_with_arg knem knem \
+          %_with_arg rdmacm rdmacm \
+          %_with_arg rocm rocm \
+          %_with_arg xpmem xpmem \
            %_with_arg vfs fuse3 \
-           %_with_arg ugni ugni \
-           %{?configure_options}
+          %_with_arg ugni ugni \
+          %{?configure_options}
 make %{?_smp_mflags} V=1
 
 %install
