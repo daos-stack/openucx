@@ -98,6 +98,12 @@ The acronym UCX stands for "Unified Communication X".
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Summary: Header files required for developing with UCX
 
+%if (0%{?suse_version} > 0)
+Provides: libucs-devel = %{version}-%{release}
+Provides: libuct-devel = %{version}-%{release}
+Provides: libucp-devel = %{version}-%{release}
+%endif
+
 %description devel
 Provides header files and examples for developing with UCX.
 
