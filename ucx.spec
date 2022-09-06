@@ -321,8 +321,8 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
-* Wed Jun 29 2022 Jeff Olivier <jeffrey.v.olivier@intel.com> - 1.13.0-1
-- Update to 1.13.0
+* Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
+- Update to 1.13.1
 
 * Fri Jun 03 2022 Brian J. Murrell <brian.murrell@intel.com> - 1.12.1-3
 - Move debian undo-upstream.patch into specfile

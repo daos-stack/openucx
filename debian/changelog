@@ -1,8 +1,8 @@
-ucx (1.13.0-1) unstable; urgency=medium
+ucx (1.13.1-1) unstable; urgency=medium
 
-  * Update to 1.13.0
+  * Update to 1.13.1
 
- -- Jeff Olivier <jeffrey.v.olivier@intel.com>  Wed, 29 Jun 2022 11:41:10 -0500
+ -- Joseph Moore <joseph.moore@intel.com>  Tue, 06 Sep 2022 11:41:10 -0500
 
 ucx (1.12.1-3) unstable; urgency=medium
 
