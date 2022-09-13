@@ -19,14 +19,21 @@
 %bcond_with    xpmem
 %bcond_with    vfs
 
+%global major 1
+%global minor 13
+%global bugrelease 0
+#%%global prerelease
+
+%global dl_version %{major}.%{minor}.%{bugrelease}
+
 Name: ucx
-Version: 1.12.1
-Release: 3%{?dist}
+Version: %{major}.%{minor}.%{bugrelease}%{?prerelease:~%{prerelease}}
+Release: 1%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
 URL: http://www.openucx.org
-Source: https://github.com/openucx/ucx/releases/download/v%version/ucx-%version.tar.gz
+Source: https://github.com/openucx/ucx/releases/download/v%{dl_version}%{?prerelease:-%{prerelease}}/ucx-%{dl_version}.tar.gz
 Patch0: undo-upstream.patch
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -91,11 +98,17 @@ The acronym UCX stands for "Unified Communication X".
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Summary: Header files required for developing with UCX
 
+%if (0%{?suse_version} > 0)
+Provides: libucs-devel = %{version}-%{release}
+Provides: libuct-devel = %{version}-%{release}
+Provides: libucp-devel = %{version}-%{release}
+%endif
+
 %description devel
 Provides header files and examples for developing with UCX.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n ucx-%{major}.%{minor}.%{bugrelease}
 
 %build
 %define _with_arg()   %{expand:%%{?with_%{1}:--with-%{2}}%%{!?with_%{1}:--without-%{2}}}
@@ -106,7 +119,7 @@ Provides header files and examples for developing with UCX.
            --disable-assertions \
            --disable-params-check \
            --without-java \
-	   --without-go \
+           --without-go \
            %_enable_arg cma cma \
            %_with_arg cuda cuda \
            %_with_arg gdrcopy gdrcopy \
@@ -144,7 +157,7 @@ rm -f %{buildroot}%{_libdir}/ucx/lib*.a
 %files devel
 %{_includedir}/uc*
 %{_libdir}/lib*.so
-%{_libdir}/pkgconfig/ucx.pc
+%{_libdir}/pkgconfig/ucx*.pc
 %{_libdir}/cmake/ucx/*.cmake
 %{_datadir}/ucx/examples
 
@@ -314,6 +327,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
+- Update to 1.13
+
 * Fri Jun 03 2022 Brian J. Murrell <brian.murrell@intel.com> - 1.12.1-3
 - Move debian undo-upstream.patch into specfile
 
