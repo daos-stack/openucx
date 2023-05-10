@@ -1,8 +1,8 @@
 diff --git a/configure.ac b/configure.ac
-index 9f97dd2a7..f32141dbe 100644
+index 5a529d4f9..4ae8fe117 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -363,17 +363,12 @@ AC_CONFIG_FILES([Makefile
+@@ -354,17 +354,12 @@ AC_CONFIG_FILES([Makefile
                   ])
  AS_IF([test "x$with_docs_only" = xyes], [], [
  AC_CONFIG_LINKS([
