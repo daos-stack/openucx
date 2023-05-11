@@ -20,7 +20,7 @@
 %bcond_with    vfs
 
 %global major 1
-%global minor 13
+%global minor 14
 %global bugrelease 0
 #%%global prerelease
 
@@ -34,7 +34,6 @@ Summary: UCX is a communication library implementing high-performance messaging
 License: BSD
 URL: http://www.openucx.org
 Source: https://github.com/openucx/ucx/releases/download/v%{dl_version}%{?prerelease:-%{prerelease}}/ucx-%{dl_version}.tar.gz
-Patch0: undo-upstream.patch
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 Prefix: %{_prefix}
@@ -327,6 +326,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Wed May 10 2023 Joseph Moore <joseph.moore@intel.com> - 1.14.1-1
+- Update to 1.14
+
 * Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
 - Update to 1.13
 
