@@ -1,3 +1,9 @@
+ucx (1.14.0-1) unstable; urgency=medium
+
+  * Update to 1.14
+
+ -- Joseph Moore <joseph.moore@intel.com>  Wed, 10 May 2023 11:41:10 -0500
+
 ucx (1.13.0-1) unstable; urgency=medium
 
   * Update to 1.13
