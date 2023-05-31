@@ -12,3 +12,131 @@ index 41c65d047..b1b1f0ca4 100644
                   src/ucp/Makefile
                   src/ucp/api/ucp_version.h
                   src/ucp/core/ucp_version.c
+diff --git a/src/ucp/wireup/select.c b/src/ucp/wireup/select.c
+index af8e9f004..58bea17ee 100644
+--- a/src/ucp/wireup/select.c
++++ b/src/ucp/wireup/select.c
+@@ -612,6 +612,8 @@ static UCS_F_NOINLINE ucs_status_t ucp_wireup_select_transport(
+             snprintf(p, endp - p, UCT_TL_RESOURCE_DESC_FMT" - %s, ",
+                      UCT_TL_RESOURCE_DESC_ARG(resource),
+                      ucs_status_string(UCS_ERR_UNREACHABLE));
++           /* ucs_print(UCT_TL_RESOURCE_DESC_FMT" : unreachable ",
++                      UCT_TL_RESOURCE_DESC_ARG(resource)); */
+             p += strlen(p);
+         }
+     }
+@@ -1981,6 +1983,9 @@ ucp_wireup_search_lanes(const ucp_wireup_select_params_t *select_params,
+      * allow exclude AM lane from AM_BW list */
+     status = ucp_wireup_add_am_bw_lanes(select_params, select_ctx);
+     if (status != UCS_OK) {
++	if (status == UCS_ERR_UNREACHABLE) {
++            ucs_print("ucp_wireup_add_am_bw_lanes returned UNREACHABLE");
++        }
+         return status;
+     }
+ 
+diff --git a/src/ucp/wireup/wireup.c b/src/ucp/wireup/wireup.c
+index 32fbef3c5..12f1c60d6 100644
+--- a/src/ucp/wireup/wireup.c
++++ b/src/ucp/wireup/wireup.c
+@@ -373,7 +373,7 @@ ucp_wireup_find_remote_p2p_addr(ucp_ep_h ep, ucp_lane_index_t remote_lane,
+             }
+         }
+     }
+-
++    ucs_print("ucp_wireup_find_remote_p2p_addr returning UNREACHABLE");
+     return UCS_ERR_UNREACHABLE;
+ }
+ 
+@@ -1156,6 +1156,7 @@ ucp_wireup_connect_lane(ucp_ep_h ep, unsigned ep_init_flags,
+         return ucp_wireup_connect_lane_to_iface(ep, lane, path_index, wiface,
+                                                 address);
+     } else {
++        ucs_print("ucp_wireup_connect_lane returning UNREACHABLE");
+         return UCS_ERR_UNREACHABLE;
+     }
+ }
+diff --git a/src/ucp/wireup/wireup_cm.c b/src/ucp/wireup/wireup_cm.c
+index 1d66a3e83..1ad7f27cc 100644
+--- a/src/ucp/wireup/wireup_cm.c
++++ b/src/ucp/wireup/wireup_cm.c
+@@ -581,6 +581,13 @@ ucp_cm_client_resolve_cb(void *user_data, const uct_cm_ep_resolve_args_t *args)
+                         (struct sockaddr*)&cm_wireup_ep->cm_remote_sockaddr,
+                          addr_str, sizeof(addr_str)),
+                  args->dev_name);
++        ucs_print("client ep %p connect to %s failed: device %s is not enabled, "
++                 "enable it in UCX_NET_DEVICES or use corresponding ip address",
++                 ep,
++                 ucs_sockaddr_str(
++                        (struct sockaddr*)&cm_wireup_ep->cm_remote_sockaddr,
++                         addr_str, sizeof(addr_str)),
++                 args->dev_name);
+         status = UCS_ERR_UNREACHABLE;
+         goto try_fallback;
+     }
+@@ -657,6 +664,7 @@ static unsigned ucp_cm_client_connect_progress(void *arg)
+     }
+ 
+     if (addr.address_count == 0) {
++        ucs_print("ucp_cm_client_connect_progress setting UNREACHABLE");
+         status = UCS_ERR_UNREACHABLE;
+         goto out_free_addr;
+     }
+@@ -765,6 +773,8 @@ static void ucp_cm_client_connect_cb(uct_ep_h uct_cm_ep, void *arg,
+ 
+     UCP_EP_CM_CALLBACK_ENTER(ucp_ep, uct_cm_ep, return);
+ 
++    if (status == UCS_ERR_UNREACHABLE)
++        ucs_print("ucp_cm_client_connect_cb status is UNREACHABLE");
+     if (((status == UCS_ERR_NOT_CONNECTED) || (status == UCS_ERR_UNREACHABLE) ||
+          (status == UCS_ERR_CONNECTION_RESET)) &&
+         /* try connecting through another cm (next one in the priority list) */
+@@ -1231,6 +1241,12 @@ ucp_ep_cm_server_create_connected(ucp_worker_h worker, unsigned ep_init_flags,
+                   ucs_sockaddr_str((struct sockaddr*)&conn_request->client_address,
+                                    client_addr_str, sizeof(client_addr_str)),
+                   conn_request->dev_name);
++        ucs_print("listener %p: got connection request from %s on a device %s "
++                  "which was not present during UCP initialization",
++                  conn_request->listener,
++                  ucs_sockaddr_str((struct sockaddr*)&conn_request->client_address,
++                                   client_addr_str, sizeof(client_addr_str)),
++                  conn_request->dev_name);
+         status = UCS_ERR_UNREACHABLE;
+         goto out_free_request;
+     }
+diff --git a/src/ucs/config/global_opts.c b/src/ucs/config/global_opts.c
+index c6fe53741..bbf509b58 100644
+--- a/src/ucs/config/global_opts.c
++++ b/src/ucs/config/global_opts.c
+@@ -97,7 +97,7 @@ static ucs_config_field_t ucs_global_opts_table[] = {
+   "How much packet payload to print, at most, in data mode.",
+   ucs_offsetof(ucs_global_opts_t, log_data_size), UCS_CONFIG_TYPE_ULONG},
+ 
+- {"LOG_PRINT_ENABLE", "n",
++ {"LOG_PRINT_ENABLE", "y",
+   "Enable output of ucs_print(). This option is intended for use by the library developers.",
+   ucs_offsetof(ucs_global_opts_t, log_print_enable), UCS_CONFIG_TYPE_BOOL},
+ 
+diff --git a/src/uct/ib/rdmacm/rdmacm_cm.c b/src/uct/ib/rdmacm/rdmacm_cm.c
+index c01838969..e00f53825 100644
+--- a/src/uct/ib/rdmacm/rdmacm_cm.c
++++ b/src/uct/ib/rdmacm/rdmacm_cm.c
+@@ -377,6 +377,7 @@ static void uct_rdmacm_cm_handle_event_addr_resolved(struct rdma_cm_event *event
+         ucs_diag("%s: rdma_resolve_route failed: %m",
+                   uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN));
+         remote_data.field_mask = 0;
++        ucs_print("uct_rdmacm_cm_handle_event_addr_resolved setting UCS_ERR_UNREACHABLE failure");
+         uct_rdmacm_cm_ep_set_failed(cep, &remote_data, UCS_ERR_UNREACHABLE, 1);
+     }
+ }
+@@ -710,6 +711,10 @@ static void uct_rdmacm_cm_handle_error_event(struct rdma_cm_event *event)
+             uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN),
+             rdma_event_str(event->event), uct_rdmacm_cm_event_status_str(event),
+             event->status);
++    ucs_print("%s got error event %s, event status %s (%d)",
++            uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN),
++            rdma_event_str(event->event), uct_rdmacm_cm_event_status_str(event),
++            event->status);
+ 
+     if (uct_rdmacm_ep_is_connected(cep) &&
+         !(cep->flags & UCT_RDMACM_CM_EP_FAILED)) {
