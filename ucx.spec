@@ -120,7 +120,6 @@ Provides header files and examples for developing with UCX.
            --disable-params-check \
            --without-java \
            --without-go \
-           --with-rdmacm \
            %_enable_arg cma cma \
            %_with_arg cuda cuda \
            %_with_arg gdrcopy gdrcopy \
