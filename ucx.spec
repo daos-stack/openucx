@@ -115,11 +115,12 @@ Provides header files and examples for developing with UCX.
 %define _enable_arg() %{expand:%%{?with_%{1}:--enable-%{2}}%%{!?with_%{1}:--disable-%{2}}}
 %configure --disable-optimizations \
            --disable-logging \
-           --disable-debug \
+           --enable-debug \
            --disable-assertions \
            --disable-params-check \
            --without-java \
            --without-go \
+           --with-rdmacm \
            %_enable_arg cma cma \
            %_with_arg cuda cuda \
            %_with_arg gdrcopy gdrcopy \
