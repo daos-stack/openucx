@@ -115,7 +115,7 @@ Provides header files and examples for developing with UCX.
 %define _enable_arg() %{expand:%%{?with_%{1}:--enable-%{2}}%%{!?with_%{1}:--disable-%{2}}}
 %configure --disable-optimizations \
            --disable-logging \
-           --enable-debug \
+           --disable-debug \
            --disable-assertions \
            --disable-params-check \
            --without-java \
