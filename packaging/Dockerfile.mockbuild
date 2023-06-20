@@ -8,7 +8,7 @@
 ARG FVERSION=38
 FROM fedora:$FVERSION
 # Needed for later use of FVERSION
-ARG FVERSION
+ARG FVERSION=37
 LABEL maintainer="daos@daos.groups.io"
 
 # Use local repo server if present
