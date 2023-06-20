@@ -5,10 +5,10 @@
 #
 
 # Pull base image
-ARG FVERSION=38
+ARG FVERSION=37
 FROM fedora:$FVERSION
 # Needed for later use of FVERSION
-ARG FVERSION=37
+ARG FVERSION
 LABEL maintainer="daos@daos.groups.io"
 
 # Use local repo server if present
