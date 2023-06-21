@@ -328,7 +328,7 @@ library internals, protocol objects, transports status, and more.
 
 %changelog
 * Wed May 10 2023 Joseph Moore <joseph.moore@intel.com> - 1.14.1-1
-- Update to 1.14
+- Update to version 1.14
 
 * Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
 - Update to 1.13
