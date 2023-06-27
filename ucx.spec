@@ -20,7 +20,7 @@
 %bcond_with    vfs
 
 %global major 1
-%global minor 13
+%global minor 14
 %global bugrelease 0
 #%%global prerelease
 
@@ -115,7 +115,7 @@ Provides header files and examples for developing with UCX.
 %define _enable_arg() %{expand:%%{?with_%{1}:--enable-%{2}}%%{!?with_%{1}:--disable-%{2}}}
 %configure --disable-optimizations \
            --disable-logging \
-           --disable-debug \
+           --enable-debug \
            --disable-assertions \
            --disable-params-check \
            --without-java \
@@ -327,6 +327,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Wed May 10 2023 Joseph Moore <joseph.moore@intel.com> - 1.14.1-1
+- Update to version 1.14
+
 * Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
 - Update to 1.13
 
