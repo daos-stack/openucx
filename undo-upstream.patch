@@ -118,10 +118,15 @@ index c6fe53741..bbf509b58 100644
    ucs_offsetof(ucs_global_opts_t, log_print_enable), UCS_CONFIG_TYPE_BOOL},
  
 diff --git a/src/uct/ib/rdmacm/rdmacm_cm.c b/src/uct/ib/rdmacm/rdmacm_cm.c
-index c01838969..e00f53825 100644
+index c01838969..b0341332d 100644
 --- a/src/uct/ib/rdmacm/rdmacm_cm.c
 +++ b/src/uct/ib/rdmacm/rdmacm_cm.c
-@@ -377,6 +377,7 @@ static void uct_rdmacm_cm_handle_event_addr_resolved(struct rdma_cm_event *event
+@@ -373,10 +373,11 @@ static void uct_rdmacm_cm_handle_event_addr_resolved(struct rdma_cm_event *event
+               uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN),
+               event->id);
+ 
+-    if (rdma_resolve_route(event->id, uct_rdmacm_cm_get_timeout(cm))) {
++    if (rdma_resolve_route(event->id, 2*uct_rdmacm_cm_get_timeout(cm))) {
          ucs_diag("%s: rdma_resolve_route failed: %m",
                    uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN));
          remote_data.field_mask = 0;
