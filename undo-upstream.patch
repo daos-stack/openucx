@@ -1,19 +1,11 @@
 diff --git a/configure.ac b/configure.ac
-index 9f97dd2a7..f32141dbe 100644
+index 1318aa66f..ba37bacce 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -363,17 +363,12 @@ AC_CONFIG_FILES([Makefile
-                  ])
- AS_IF([test "x$with_docs_only" = xyes], [], [
- AC_CONFIG_LINKS([
--                 debian/compat:debian/compat
-                  debian/copyright:debian/copyright
--                 debian/ucx.prerm:debian/ucx.prerm
-                  ])
- AC_CONFIG_FILES([
-                  ucx.spec
+@@ -360,9 +360,6 @@ AC_CONFIG_FILES([
                   ucx.pc
                   contrib/rpmdef.sh
+                  contrib/ucx
 -                 debian/rules
 -                 debian/control
 -                 debian/changelog
