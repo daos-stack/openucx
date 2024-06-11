@@ -20,15 +20,15 @@
 %bcond_with    vfs
 
 %global major 1
-%global minor 13
+%global minor 17
 %global bugrelease 0
-#%%global prerelease
+#%%global prerelease a1
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
 Name: ucx
 Version: %{major}.%{minor}.%{bugrelease}%{?prerelease:~%{prerelease}}
-Release: 1%{?dist}
+Release: 1.g7bb2722%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
@@ -327,6 +327,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Tue Jun 11 2024 Joseph Moore <joseph.moore@intel.com> - 1.17.0-1
+- Update to 1.17
+
 * Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
 - Update to 1.13
 
