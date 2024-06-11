@@ -20,15 +20,15 @@
 %bcond_with    vfs
 
 %global major 1
-%global minor 13
-%global bugrelease 0
+%global minor 17
+%global bugrelease 1
 #%%global prerelease
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
 Name: ucx
 Version: %{major}.%{minor}.%{bugrelease}%{?prerelease:~%{prerelease}}
-Release: 1%{?dist}
+Release: 1.g7bb2722%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
