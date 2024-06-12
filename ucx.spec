@@ -108,7 +108,7 @@ Provides: libucp-devel = %{version}-%{release}
 Provides header files and examples for developing with UCX.
 
 %prep
-%autosetup -p1 -n ucx-%{major}.%{minor}.%{bugrelease}
+%autosetup -p1 -n ucx-770b5a6700fc7fa920a90a4c8b44b8f655c3a301
 
 %build
 %define _with_arg()   %{expand:%%{?with_%{1}:--with-%{2}}%%{!?with_%{1}:--without-%{2}}}
