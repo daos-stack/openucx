@@ -22,7 +22,7 @@
 %global major 1
 %global minor 17
 %global bugrelease 0
-#%%global prerelease a1
+%global prerelease a1
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
@@ -33,7 +33,7 @@ Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
 URL: http://www.openucx.org
-Source: https://github.com/openucx/ucx/releases/download/v%{dl_version}%{?prerelease:-%{prerelease}}/ucx-%{dl_version}.tar.gz
+Source: https://github.com/openucx/ucx/archive/770b5a6.tar.gz
 Patch0: undo-upstream.patch
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
