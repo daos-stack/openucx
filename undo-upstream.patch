@@ -12,3 +12,48 @@ index 1318aa66f..ba37bacce 100644
                   src/ucp/Makefile
                   src/ucp/api/ucp_version.h
                   src/ucp/core/ucp_version.c
+diff --git a/src/ucs/config/global_opts.c b/src/ucs/config/global_opts.c
+index 3fd564edd..58412dba2 100644
+--- a/src/ucs/config/global_opts.c
++++ b/src/ucs/config/global_opts.c
+@@ -97,7 +97,7 @@ static ucs_config_field_t ucs_global_opts_table[] = {
+   "How much packet payload to print, at most, in data mode.",
+   ucs_offsetof(ucs_global_opts_t, log_data_size), UCS_CONFIG_TYPE_ULONG},
+ 
+- {"LOG_PRINT_ENABLE", "n",
++ {"LOG_PRINT_ENABLE", "y",
+   "Enable output of ucs_print(). This option is intended for use by the library developers.",
+   ucs_offsetof(ucs_global_opts_t, log_print_enable), UCS_CONFIG_TYPE_BOOL},
+ 
+diff --git a/src/uct/ib/rdmacm/rdmacm_cm.c b/src/uct/ib/rdmacm/rdmacm_cm.c
+index 49a100849..691aa437b 100644
+--- a/src/uct/ib/rdmacm/rdmacm_cm.c
++++ b/src/uct/ib/rdmacm/rdmacm_cm.c
+@@ -54,6 +54,7 @@ ucs_status_t uct_rdmacm_cm_reject(uct_rdmacm_cm_t *cm, struct rdma_cm_id *id)
+ 
+     ucs_trace("reject on cm_id %p", id);
+ 
++
+     if (rdma_reject(id, &hdr, sizeof(hdr))) {
+         uct_cm_peer_error(&cm->super,
+                           "rdma_reject (id=%p local addr=%s remote addr=%s) "
+@@ -380,6 +381,8 @@ static void uct_rdmacm_cm_handle_event_addr_resolved(struct rdma_cm_event *event
+               event->id);
+ 
+     if (rdma_resolve_route(event->id, uct_rdmacm_cm_get_timeout(cm))) {
++        ucs_print("%s: rdma_resolve_route failed: %m",
++                  uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN));
+         ucs_diag("%s: rdma_resolve_route failed: %m",
+                   uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN));
+         remote_data.field_mask = 0;
+@@ -706,6 +709,10 @@ static void uct_rdmacm_cm_handle_error_event(struct rdma_cm_event *event)
+     case RDMA_CM_EVENT_CONNECT_ERROR:
+         status    = UCS_ERR_UNREACHABLE;
+         log_level = uct_rdmacm_cm_ep_get_cm(cep)->super.config.failure_level;
++        ucs_print("%s got error event %s, event status %s (%d)",
++            uct_rdmacm_cm_ep_str(cep, ep_str, UCT_RDMACM_EP_STRING_LEN),
++            rdma_event_str(event->event), uct_rdmacm_cm_event_status_str(event),
++            event->status);
+         break;
+     default:
+         status    = UCS_ERR_IO_ERROR;
