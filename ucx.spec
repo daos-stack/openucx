@@ -20,20 +20,20 @@
 %bcond_with    vfs
 
 %global major 1
-%global minor 13
+%global minor 17
 %global bugrelease 0
-#%%global prerelease
+%global prerelease a1
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
 Name: ucx
 Version: %{major}.%{minor}.%{bugrelease}%{?prerelease:~%{prerelease}}
-Release: 1%{?dist}
+Release: 1.g7bb2722%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD
 URL: http://www.openucx.org
-Source: https://github.com/openucx/ucx/releases/download/v%{dl_version}%{?prerelease:-%{prerelease}}/ucx-%{dl_version}.tar.gz
+Source: https://github.com/openucx/ucx/archive/770b5a6.tar.gz
 Patch0: undo-upstream.patch
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -108,11 +108,12 @@ Provides: libucp-devel = %{version}-%{release}
 Provides header files and examples for developing with UCX.
 
 %prep
-%autosetup -p1 -n ucx-%{major}.%{minor}.%{bugrelease}
+%autosetup -p1 -n ucx-770b5a6700fc7fa920a90a4c8b44b8f655c3a301
 
 %build
 %define _with_arg()   %{expand:%%{?with_%{1}:--with-%{2}}%%{!?with_%{1}:--without-%{2}}}
 %define _enable_arg() %{expand:%%{?with_%{1}:--enable-%{2}}%%{!?with_%{1}:--disable-%{2}}}
+./autogen.sh
 %configure --disable-optimizations \
            --disable-logging \
            --disable-debug \
@@ -327,6 +328,9 @@ library internals, protocol objects, transports status, and more.
 %endif
 
 %changelog
+* Tue Jun 11 2024 Joseph Moore <joseph.moore@intel.com> - 1.17.0-1
+- Update to 1.17
+
 * Tue Sep 06 2022 Joseph Moore <joseph.moore@intel.com> - 1.13.1-1
 - Update to 1.13
 
