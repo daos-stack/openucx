@@ -115,20 +115,12 @@ Provides header files and examples for developing with UCX.
 %define _enable_arg() %{expand:%%{?with_%{1}:--enable-%{2}}%%{!?with_%{1}:--disable-%{2}}}
 ./autogen.sh
 %configure --disable-optimizations \
-           --enable-logging \
-           --enable-debug \
+           --disable-logging \
+           --disable-debug \
            --disable-assertions \
            --disable-params-check \
-           --enable-cma \
            --without-java \
            --without-go \
-           --with-verbs \
-           --without-knem \
-           --with-rdmacm \
-           --without-rocm \
-           --with-xpmem \
-           --without-fuse3 \
-           --without-ugni \
            %_enable_arg cma cma \
            %_with_arg cuda cuda \
            %_with_arg gdrcopy gdrcopy \
