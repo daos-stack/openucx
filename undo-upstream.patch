@@ -2,11 +2,10 @@ diff --git a/configure.ac b/configure.ac
 index 9f97dd2a7..f32141dbe 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -358,10 +358,7 @@ AC_CONFIG_FILES([
- AC_CONFIG_FILES([
-                  ucx.spec
+@@ -360,9 +360,6 @@ AC_CONFIG_FILES([
                   ucx.pc
                   contrib/rpmdef.sh
+                  contrib/ucx
 -                 debian/rules
 -                 debian/control
 -                 debian/changelog
