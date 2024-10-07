@@ -22,13 +22,13 @@
 %global major 1
 %global minor 17
 %global bugrelease 0
-#%%global prerelease
+%global prerelease a1
 
 %global dl_version %{major}.%{minor}.%{bugrelease}
 
 Name: ucx
 Version: %{major}.%{minor}.%{bugrelease}%{?prerelease:~%{prerelease}}
-Release: 1%{?dist}
+Release: 1.g7bb2722%{?dist}
 Summary: UCX is a communication library implementing high-performance messaging
 
 License: BSD-3-Clause AND MIT AND CC-PDDC AND (BSD-3-Clause OR Apache-2.0)
